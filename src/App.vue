@@ -1,15 +1,35 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+
+  <h1>{{ title }}</h1>
+  <input type="text" ref="Username">
+  <button @click="focus">Focus</button>
+  <button @click="popupOpen">Open popup</button>
+  <div v-if="popupActive">
+    <Popup :message="message" :couler="couler" @closer="popupOpen" />
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Popup from './components/Popup.vue'
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+  components: {Popup},
+  data () {
+    return {
+      title: 'Vu:3 app UwU',
+      message: "This is ground control to majoooor Tommm. Btw scheme =",
+      couler: 'placeholder xD',
+      popupActive: false
+    }
+  },
+  methods: {
+    focus() {
+      this.$refs.Username.focus()
+    },
+    popupOpen() {
+      this.popupActive = !this.popupActive
+    }
   }
 }
 </script>
